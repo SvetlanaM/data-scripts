@@ -20,3 +20,13 @@ AS $function$
           RETURN NEW;
       END;
   $function$
+
+CREATE OR REPLACE FUNCTION public.slug_function_cats1()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+      BEGIN
+          NEW.slug := slugify(regexp_replace(NEW.name::text,  '\d+', '') || NEW.id::text);
+          RETURN NEW;
+      END;
+  $function$
