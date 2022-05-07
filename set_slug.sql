@@ -10,3 +10,13 @@ BEGIN
   RETURN _new;
 END;
 $function$
+
+CREATE OR REPLACE FUNCTION public.slug_function()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+      BEGIN
+          NEW.slug := slugify(NEW.name);
+          RETURN NEW;
+      END;
+  $function$
